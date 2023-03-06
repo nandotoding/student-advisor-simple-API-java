@@ -25,6 +25,10 @@ public class JwtUtil {
     }
 
     public boolean validateToken(String token) {
+        if (token == null) {
+            throw new UnauthorizedException("Unauthorized access");
+        }
+
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
             return true;
